@@ -10,9 +10,9 @@ df = pd.read_csv("data/sales.csv")
 print("=== 数据概览 ===")
 print(f"数据量：{df.shape[0]} 行，{df.shape[1]} 列")
 print(f"列名：{list(df.columns)}")
-print()
+print('df.head():')
 print(df.head())
-print()
+print('df.describe()')
 print(df.describe())
 print()
 
@@ -73,3 +73,24 @@ cross = df.pivot_table(
 )
 print("=== 城市×产品 销售额矩阵 ===")
 print(cross)
+
+#作业来了，自己写一段分析代码：
+# 找出每个月卖得最好的产品是什么（按月分组，再按产品分组，求销售额）
+# 计算每个产品的平均客单价（total 的平均值）
+# 找出哪个城市的订单量最少
+# 提示：
+
+# 第1题需要两层 groupby：df.groupby(["month", "product"])["total"].sum()
+monthly_product = df.groupby(["month","product"])["total"].sum()
+best_product = monthly_product.groupby('month').idxmax()
+print("=== 每个月卖得最好的产品是 ===")
+print(best_product)
+print()
+# 第2题用 groupby("product")["total"].mean()
+print("=== 计算每个产品的平均客单价 ===")
+product_mean = df.groupby("product")["total"].mean()
+print(product_mean)
+# 第3题用 groupby("city")["order_id"].count() 然后取最小
+print("=== 哪个城市的订单量最少 ===")
+city_cnt = df.groupby("city")["order_id"].count().idxmin()
+print(city_cnt)
