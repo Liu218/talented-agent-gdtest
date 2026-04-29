@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "stock-server": {
+      "command": "/Users/hb37989/Desktop/anaconda3/bin/python",
+      "args": ["/Users/hb37989/Desktop/python_learning/stock_mcp/server.py"],
+      "disabled": false,
+      "autoApprove": []
+    }
+  }
+}
